@@ -17,7 +17,7 @@ class NavBar extends Component {
                     <Navbar.Brand href="/new">New Question</Navbar.Brand>
                     <Navbar.Brand href="/leaderboard">Leaderboard</Navbar.Brand>
                     <Nav>
-                    <Navbar.Text style={{marginRight: '1rem'}}>Hello {authedName} </Navbar.Text>
+                    <Navbar.Text style={{marginRight:'1rem'}}>Hello, {authedName} </Navbar.Text>
                     <Button>Logout</Button>
                     </Nav>
                 </Container>
