@@ -39,19 +39,19 @@ class Home extends Component {
       <div>
         <NavBar />
         <Tabs
-          defaultActiveKey="Answered"
+          defaultActiveKey="Not Answered"
           fill
           id="uncontrolled-tab-example"
           className="mb-3"
           style={{ marginTop: "2rem" }}
         >
-          <Tab eventKey="Answered" title="Answered">
-            {AnsweredQuestions.map((id) => (
+          <Tab eventKey="Not Answered" title="Not Answered">
+            {unAnsweredQuestions.map((id) => (
               <Questions key={id} id={id} />
             ))}
           </Tab>
-          <Tab eventKey="Not Answered" title="Not Answered">
-            {unAnsweredQuestions.map((id) => (
+          <Tab eventKey="Answered" title="Answered">
+            {AnsweredQuestions.map((id) => (
               <Questions key={id} id={id} />
             ))}
           </Tab>

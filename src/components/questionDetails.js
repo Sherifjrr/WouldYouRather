@@ -6,9 +6,8 @@ import { Button } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Badge from "react-bootstrap/Badge";
-import Page404 from "./404";
 import { handleAnswerQuestion } from "../actions/questions";
-
+import Page404 from "./404";
 class Poll extends Component {
   state = {
     checked: "",
@@ -25,8 +24,13 @@ class Poll extends Component {
     this.props.history.push("/home");
   };
   render() {
+    const { question, authedUser, history } = this.props;
     console.log(this.props);
-    const { question, authedUser } = this.props;
+    if (!question) {
+      history.push("/404");
+      return <Page404 />;
+    }
+
     const Answered =
       question.optionOne.votes.includes(authedUser) ||
       question.optionTwo.votes.includes(authedUser);
@@ -37,7 +41,6 @@ class Poll extends Component {
       Math.round((totalVoteOptionOne / totalVotes) * 10000) / 100;
     const optionTwoPercentage =
       Math.round((totalVoteOptionTwo / totalVotes) * 10000) / 100;
-
     if (question) {
       return (
         <div>
@@ -142,11 +145,6 @@ function mapStateToProps({ authedUser, users, questions }, props) {
   const id = props.match.params.id;
   const question = questions[id];
 
-  // const vote = Answered
-  //   ? question.optionOne.votes.includes(authedUser)
-  //     ? "optionOne"
-  //     : "optionTwo"
-  //   : null;
   return {
     authedUser,
     users,

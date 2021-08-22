@@ -23,6 +23,9 @@ class Login extends Component {
       name: users[user].name,
       id: users[user].id,
     }));
+    const { from } = this.props.location.state || {
+      from: { pathname: "/home" },
+    };
 
     return (
       <Card
@@ -42,7 +45,7 @@ class Login extends Component {
           options={usersList.map((user) => user.name)}
           onChange={(e) => this.setState({ authedUser: e.value, status: "" })}
         />
-        <Link to="home" style={{ display: "contents" }}>
+        <Link to={from} style={{ display: "contents" }}>
           <Button
             variant="success"
             disabled={this.state.status}

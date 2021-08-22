@@ -7,6 +7,8 @@ import Home from "./home";
 import Leaderboard from "./leaderboard";
 import AddQuestion from "./addQuestion";
 import Poll from "./questionDetails";
+import Page404 from "./404";
+import ProtectedRoute from "./protectedRoute";
 
 class App extends Component {
   componentDidMount() {
@@ -19,24 +21,27 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path={"/"} component={Login} />
-            <Route exact path={"/home"} component={Home}>
-              {this.props.authedUser === null ? <Redirect to="/" /> : <Home />}
-            </Route>
-            <Route exact path={"/leaderboard"} component={Leaderboard}>
-              {this.props.authedUser === null ? (
-                <Redirect to="/" />
-              ) : (
-                <Leaderboard />
-              )}
-            </Route>
-            <Route exact path={"/add"} component={AddQuestion}>
-              {this.props.authedUser === null ? (
-                <Redirect to="/" />
-              ) : (
-                <AddQuestion />
-              )}
-            </Route>
-            <Route path="/questions/:id" component={Poll} />
+            <ProtectedRoute exact path="/home" name="Home" component={Home} />
+            <ProtectedRoute
+              exact
+              path="/leaderboard"
+              name="Leaderboard"
+              component={Leaderboard}
+            />
+            <ProtectedRoute
+              exact
+              path="/add"
+              name="AddQuestion"
+              component={AddQuestion}
+            />
+            <ProtectedRoute
+              exact
+              path="/questions/:id"
+              name="QuestionDetails"
+              component={Poll}
+            />
+            <Route exact path="/404" component={Page404} />
+            <Redirect to="/404" />
           </Switch>
         </BrowserRouter>
       </div>
